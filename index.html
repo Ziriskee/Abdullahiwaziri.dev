@@ -7,12 +7,58 @@
     <!-- ================================================= -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Portfolio of Abdullahi Waziri Bello — Computer Science student at ATBU, Python developer, and creator of Echo-Fetch Download Manager. Open to internships and collaborations.">
+    <link rel="canonical" href="https://abdullahiwaziri-dev.onrender.com/index.html">
+    <!-- Add to <head>, after canonical link: -->
+    <script type="application/ld+json">
+        {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Abdullahi Waziri Bello",
+        "jobTitle": "Computer Scientist",
+        "url": "https://abdullahiwaziri-dev.onrender.com",
+        "sameAs": [
+            "https://www.linkedin.com/in/abdullahi-waziri-1b52142b3",
+            "https://github.com/Ziriskee"
+        ],
+        "worksFor": {
+            "@type": "Organization",
+            "name": "Abubakar Tafawa Balewa University"
+        },
+        "alumniOf": {
+            "@type": "EducationalOrganization",
+            "name": "Abubakar Tafawa Balewa University"
+        }
+        }
+    </script>
     <title>Abdullahi Waziri Bello - Computer Scientist</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    </noscript> <!-- Add to <head> of index.html, after the CSS links: -->
+    <style>
+        /* Fix link contrast in dark mode */
+        [data-theme="dark"] .footer-section a {
+            color: #818cf8 !important;
+            /* Lighter primary */
+        }
+
+        [data-theme="dark"] .footer-section a:hover {
+            color: #a5b4fc !important;
+        }
+
+        /* Add subtle text-shadow for extra readability */
+        [data-theme="dark"] .footer-section a {
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+    </style>
 </head>
 
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <!-- Theme Toggle -->
     <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
         <i class="fas fa-moon"></i>
@@ -38,7 +84,7 @@
         </nav>
     </header>
 
-    <main>
+    <main id="main-content">
         <!-- Hero Section -->
         <section class="hero">
             <div class="container">
@@ -211,16 +257,21 @@
                 <div class="footer-section">
                     <h4>Connect</h4>
                     <div class="social-links">
-                        <a href="https://www.linkedin.com/in/abdullahi-waziri-1b52142b3" aria-label="LinkedIn"><i
-                                class="fab fa-linkedin"></i></a>
-                        <a href="https://github.com/Ziriskee" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                        <a href="mailto:waziriabdullahi36@gmail.com" aria-label="Email"><i
+                        <a href="https://www.linkedin.com/in/abdullahi-waziri-1b52142b3"
+                            aria-label="View my LinkedIn profile" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://github.com/Ziriskee" aria-label="View my GitHub profile" target="_blank"
+                            rel="noopener noreferrer">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="mailto:waziriabdullahi36@gmail.com" aria-label="Send me an email"><i
                                 class="fas fa-envelope"></i></a>
                     </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 Abdullahi Waziri Bello. All rights reserved.</p>
+                <p>&copy; 2026 Abdullahi Waziri Bello. All rights reserved.</p>
             </div>
         </div>
     </footer>

@@ -6,7 +6,7 @@
  * ============================================
  */
 
-/* ===== 1. CSS VARIABLES ===== */
+/* ===== 1. CSS VARIABLES & THEME SETUP ===== */
 :root {
     /* Colors - Dark Theme (Default) */
     --primary-color: #6366f1;
@@ -72,21 +72,29 @@
     --header-height: 70px;
 }
 
-/* Light Theme Override */
+/* Light Theme Override - IMPROVED FOR BETTER CONTRAST */
 [data-theme="light"] {
-    --bg-primary: #ffffff;
-    --bg-secondary: #f8fafc;
+    --bg-primary: #ffffffc9;
+    --bg-secondary: #f8fafcda;
     --bg-card: #ffffff;
     --bg-header: rgba(255, 255, 255, 0.95);
     --bg-footer: #f1f5f9;
-    --text-primary: #1e293b;
-    --text-secondary: #475569;
+
+    /* Improved text colors for better contrast */
+    --text-primary: #0f172a;
+    /* Darker for better contrast */
+    --text-secondary: #334155;
+    /* Darker for better contrast */
     --text-muted: #64748b;
-    --border-color: #e2e8f0;
-    --border-light: #cbd5e1;
-    --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    --shadow-xl: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+
+    /* Improved border colors */
+    --border-color: #cbd5e1;
+    --border-light: #e2e8f0d3;
+
+    /* Slightly stronger shadows for depth */
+    --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
+    --shadow-lg: 0 4px 6px -1px rgba(0, 0, 0, 0.15);
+    --shadow-xl: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
 }
 
 /* ===== 2. CSS RESET & BASE ===== */
@@ -1250,6 +1258,35 @@ nav {
     transition: transform 0.3s ease;
 }
 
+/* ===== LIGHT MODE LINK CONTRAST FIXES ===== */
+[data-theme="light"] a:not(.btn):not(.nav-link):not(.project-link):not(.view-certificate):not(.social-link):not(.theme-toggle) {
+    color: #4338ca;
+    /* Darker primary for better contrast */
+}
+
+[data-theme="light"] a:not(.btn):not(.nav-link):not(.project-link):not(.view-certificate):not(.social-link):not(.theme-toggle):hover {
+    color: #3730a3;
+    /* Even darker on hover */
+}
+
+/* Footer links in light mode */
+[data-theme="light"] .footer-section a {
+    color: #4338ca !important;
+}
+
+[data-theme="light"] .footer-section a:hover {
+    color: #3730a3 !important;
+}
+
+/* Contact section links in light mode */
+[data-theme="light"] .contact-details a:not(.btn) {
+    color: #4338ca !important;
+}
+
+[data-theme="light"] .contact-details a:not(.btn):hover {
+    color: #3730a3 !important;
+}
+
 /* ===== 18. ANIMATIONS ===== */
 @keyframes fadeIn {
     from {
@@ -1456,6 +1493,98 @@ img[loading="lazy"]:not([src*=""]) {
     }
 }
 
+/* ===== LIGHT MODE ENHANCEMENTS ===== */
+
+/* Improve card backgrounds in light mode */
+[data-theme="light"] .project-card,
+[data-theme="light"] .certificate-card,
+[data-theme="light"] .fact-item,
+[data-theme="light"] .timeline-content {
+    background: var(--bg-card);
+    border-color: var(--border-light);
+    box-shadow: var(--shadow);
+}
+
+/* Improve hover states in light mode */
+[data-theme="light"] .project-card:hover,
+[data-theme="light"] .certificate-card:hover {
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Improve form inputs in light mode */
+[data-theme="light"] .form-group input,
+[data-theme="light"] .form-group textarea,
+[data-theme="light"] .form-group select {
+    background: #f8fafc;
+    /* Slightly off-white for better contrast */
+    border-color: var(--border-color);
+}
+
+[data-theme="light"] .form-group input:focus,
+[data-theme="light"] .form-group textarea:focus,
+[data-theme="light"] .form-group select:focus {
+    background: #ffffffe8;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+/* Improve skill tags in light mode */
+[data-theme="light"] .skill-tag {
+    background: rgba(99, 102, 241, 0.15);
+    color: #4338ca;
+    /* Darker for better contrast */
+    border-color: rgba(99, 102, 241, 0.3);
+}
+
+[data-theme="light"] .skill-tag:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* Improve timeline in light mode */
+[data-theme="light"] .timeline::before {
+    background: linear-gradient(to bottom, var(--primary-color), var(--accent-color));
+}
+
+[data-theme="light"] .timeline-content::before {
+    background: var(--primary-color);
+    border-color: var(--bg-primary);
+    /* White background for the dot */
+}
+
+/* Improve section backgrounds in light mode */
+[data-theme="light"] .about,
+[data-theme="light"] .featured-projects,
+[data-theme="light"] .skills-section {
+    background: var(--bg-secondary);
+}
+
+[data-theme="light"] .experience,
+[data-theme="light"] .contact {
+    background: var(--bg-primary);
+}
+
+/* Improve page headers in light mode */
+[data-theme="light"] .page-header {
+    background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+}
+
+[data-theme="light"] .page-header::before {
+    background: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.08) 0%, transparent 70%);
+}
+
+/* Improve hero section in light mode */
+[data-theme="light"] .hero {
+    background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+}
+
+[data-theme="light"] .hero::before {
+    background:
+        radial-gradient(circle at 30% 20%, rgba(99, 102, 241, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 70% 80%, rgba(245, 158, 11, 0.08) 0%, transparent 50%);
+}
+
 /* ===== 21. ACCESSIBILITY (FIX #10 - Skip Link) ===== */
 .skip-link {
     position: absolute;
@@ -1509,4 +1638,61 @@ img[loading="lazy"]:not([src*=""]) {
     display: flex;
     align-items: center;
     gap: var(--spacing-sm);
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+
+    /* Hide interactive elements */
+    .theme-toggle,
+    .hamburger,
+    .nav-links,
+    .btn,
+    .project-overlay,
+    .certificate-overlay,
+    .modal {
+        display: none !important;
+    }
+
+    /* Ensure content is visible */
+    body {
+        background: white !important;
+        color: black !important;
+        font-size: 12pt;
+        line-height: 1.4;
+    }
+
+    /* Adjust layout for print */
+    .container {
+        max-width: 100%;
+        padding: 0;
+    }
+
+    section {
+        padding: 20px 0;
+        page-break-inside: avoid;
+    }
+
+    /* Ensure images print properly */
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    /* Adjust links for print */
+    a {
+        color: black !important;
+        text-decoration: none;
+    }
+
+    a[href]::after {
+        content: " (" attr(href) ")";
+        font-size: 0.9em;
+        color: #666;
+    }
+
+    /* Hide external links that aren't useful in print */
+    a[href^="http"]::after {
+        content: " ↗";
+    }
 }

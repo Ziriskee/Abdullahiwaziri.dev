@@ -10,6 +10,18 @@ class Portfolio {
         this.init();
     }
 
+    debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+
     // ==================== INITIALIZATION ====================
     getCurrentPage() {
         const path = window.location.pathname;
@@ -38,7 +50,16 @@ class Portfolio {
 
         const themeToggle = document.getElementById('themeToggle');
         if (themeToggle) {
+            // Click handler
             themeToggle.addEventListener('click', () => this.toggleTheme(themeToggle));
+
+            // Keyboard handler
+            themeToggle.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.toggleTheme(themeToggle);
+                }
+            });
         }
     }
 
@@ -174,16 +195,34 @@ class Portfolio {
         const closeBtn = modal.querySelector('.modal-close');
 
         const openModal = (imageSrc, title) => {
+            // Show loading state
+            modalImg.style.opacity = '0.5';
+            modalImg.alt = 'Loading...';
+
             modal.style.display = 'block';
-            modalImg.src = imageSrc;
-            modalImg.alt = title;
             captionText.textContent = title;
             document.body.style.overflow = 'hidden';
+
+            // Load image with error handling
+            const img = new Image();
+            img.onload = () => {
+                modalImg.src = imageSrc;
+                modalImg.alt = title;
+                modalImg.style.opacity = '1';
+            };
+            img.onerror = () => {
+                console.warn(`Failed to load certificate image: ${imageSrc}`);
+                modalImg.src = 'images/placeholder-certificate.jpg'; // Fallback image
+                modalImg.alt = 'Certificate image not available';
+                modalImg.style.opacity = '1';
+            };
+            img.src = imageSrc;
         };
 
         const closeModal = () => {
             modal.style.display = 'none';
             document.body.style.overflow = 'auto';
+            modalImg.style.opacity = '1'; // Reset for next open
         };
 
         // Open modal triggers
@@ -201,18 +240,44 @@ class Portfolio {
             if (e.key === 'Escape' && modal.style.display === 'block') closeModal();
         });
     }
-
     // ==================== ANIMATIONS ====================
     setupSharedFeatures() {
         this.setupHeaderScroll();
         this.setupFadeInAnimations();
     }
 
+    setupFadeInAnimations() {
+        // Use will-change for better performance
+        const animatedElements = document.querySelectorAll('.project-card, .skill-item, .fact-item, .timeline-item, .certificate-card, .faq-item');
+
+        animatedElements.forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            el.style.willChange = 'opacity, transform'; // Performance hint
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                    entry.target.style.willChange = 'auto'; // Reset after animation
+                    observer.unobserve(entry.target); // Stop observing after animation
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        animatedElements.forEach(el => observer.observe(el));
+    }
+
     setupHeaderScroll() {
         const header = document.querySelector('header');
-        window.addEventListener('scroll', () => {
+
+        const handleScroll = this.debounce(() => {
             header?.classList.toggle('scrolled', window.scrollY > 50);
-        });
+        }, 100);
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
     }
 
     setupFadeInAnimations() {
@@ -299,9 +364,39 @@ class Portfolio {
         const form = document.getElementById('contactForm');
         if (!form) return;
 
+        // Prevent default form submission
         form.addEventListener('submit', (e) => {
             e.preventDefault();
-            this.handleFormSubmission(form);
+
+            // Get form data
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData);
+
+            // Validate form
+            if (!this.validateForm(data)) {
+                this.showNotification('Please fill in all required fields correctly.', 'error');
+                return;
+            }
+
+            // Construct mailto link
+            const subject = encodeURIComponent(data.subject);
+            const body = encodeURIComponent(
+                `Name: ${data.name}\n` +
+                `Email: ${data.email}\n\n` +
+                `${data.message}`
+            );
+
+            // Open email client
+            window.location.href = `mailto:waziriabdullahi36@gmail.com?subject=${subject}&body=${body}`;
+
+            // Show success message
+            this.showNotification('Opening your email client...', 'success');
+
+            // Reset form after delay
+            setTimeout(() => {
+                form.reset();
+                form.querySelectorAll('.form-group').forEach(group => group.classList.remove('focused'));
+            }, 1000);
         });
 
         // Floating labels
@@ -347,15 +442,18 @@ class Portfolio {
 
     // ==================== NOTIFICATIONS ====================
     showNotification(message, type = 'info') {
+        // Remove existing notification
         document.querySelector('.notification')?.remove();
 
         const notification = document.createElement('div');
         notification.className = `notification ${type}`;
+        notification.setAttribute('role', 'alert');
+        notification.setAttribute('aria-live', 'polite');
         notification.innerHTML = `
-            <div class="notification-content">
-                <i class="fas fa-${this.getNotificationIcon(type)}"></i>
-                <span>${message}</span>
-            </div>`;
+        <div class="notification-content">
+            <i class="fas fa-${this.getNotificationIcon(type)}" aria-hidden="true"></i>
+            <span>${message}</span>
+        </div>`;
 
         Object.assign(notification.style, {
             position: 'fixed', top: '100px', right: '20px',
@@ -369,7 +467,11 @@ class Portfolio {
         });
 
         document.body.appendChild(notification);
+
+        // Animate in
         setTimeout(() => notification.style.transform = 'translateX(0)', 100);
+
+        // Remove after 5 seconds
         setTimeout(() => {
             notification.style.transform = 'translateX(100%)';
             setTimeout(() => notification.remove(), 300);
@@ -405,6 +507,7 @@ class Portfolio {
         document.head.appendChild(style);
     }
 
+    // ==================== UTILITIES ====================
     setupLazyLoading() {
         const images = document.querySelectorAll('img[loading="lazy"]');
         if (images.length === 0) return;
@@ -413,12 +516,32 @@ class Portfolio {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const img = entry.target;
-                    if (img.dataset.src) img.src = img.dataset.src;
-                    img.classList.remove('lazy');
-                    observer.unobserve(img);
+
+                    // Load image
+                    if (img.dataset.src) {
+                        const originalSrc = img.src;
+                        img.src = img.dataset.src;
+
+                        // Handle load success
+                        img.onload = () => {
+                            img.classList.add('loaded');
+                            observer.unobserve(img);
+                        };
+
+                        // Handle load error
+                        img.onerror = () => {
+                            console.warn(`Failed to load image: ${img.dataset.src}`);
+                            img.src = originalSrc; // Fallback to original
+                            img.classList.add('loaded');
+                            observer.unobserve(img);
+                        };
+                    } else {
+                        img.classList.add('loaded');
+                        observer.unobserve(img);
+                    }
                 }
             });
-        });
+        }, { threshold: 0.1 });
 
         images.forEach(img => observer.observe(img));
     }
