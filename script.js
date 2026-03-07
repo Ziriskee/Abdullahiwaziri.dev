@@ -41,6 +41,7 @@ class Portfolio {
         this.setupSharedFeatures();
         this.setupLazyLoading();
         this.setupPageTransitions();
+        this.setupCardSpotlight();
     }
 
     // ==================== THEME MANAGEMENT ====================
@@ -268,6 +269,27 @@ class Portfolio {
         }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
         animatedElements.forEach(el => observer.observe(el));
+    }
+
+    // Add mouse tracking for card spotlight effects
+    setupCardSpotlight() {
+        const cards = document.querySelectorAll('.project-card, .certificate-card');
+
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.setProperty('--mouse-x', '50%');
+                card.style.setProperty('--mouse-y', '50%');
+            });
+        });
     }
 
     setupHeaderScroll() {
