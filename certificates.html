@@ -7,10 +7,73 @@
     <!-- ================================================= -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Certificates and education of Abdullahi Waziri Bello — Computer Science student at ATBU with certifications in Python, HTML, and Microsoft Excel.">
+    <link rel="canonical" href="https://abdullahiwaziri-dev.onrender.com/certificates.html">
+    <!-- Add to <head>, after canonical link: -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Abdullahi Waziri Bello",
+        "hasCredential": [
+            {
+            "@type": "EducationalOccupationalCredential",
+            "name": "Python Programming",
+            "credentialCategory": "certificate",
+            "recognizedBy": {
+                "@type": "Organization",
+                "name": "Sololearn"
+            },
+            "description": "Programming Fundamentals & Syntax"
+            },
+            {
+            "@type": "EducationalOccupationalCredential",
+            "name": "HTML",
+            "credentialCategory": "certificate",
+            "recognizedBy": {
+                "@type": "Organization",
+                "name": "Sololearn"
+            },
+            "description": "Web Development Fundamentals"
+            },
+            {
+            "@type": "EducationalOccupationalCredential",
+            "name": "Microsoft Excel",
+            "credentialCategory": "certificate",
+            "recognizedBy": {
+                "@type": "Organization",
+                "name": "upGrad/Great Learning Academy"
+            },
+            "description": "Spreadsheet Management & Analysis"
+            }
+        ]
+        }
+    </script>
     <title>Certificates - Abdullahi Waziri Bello</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    </noscript>
+    <!-- Add to <head> of certificates.html, after the CSS links: -->
     <style>
+        /* Fix link contrast in dark mode */
+        [data-theme="dark"] .footer-section a {
+            color: #818cf8 !important;
+            /* Lighter primary */
+        }
+
+        [data-theme="dark"] .footer-section a:hover {
+            color: #a5b4fc !important;
+        }
+
+        /* Add subtle text-shadow for extra readability */
+        [data-theme="dark"] .footer-section a {
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
         /* Modal Styles */
         .modal {
             display: none;
@@ -138,11 +201,11 @@
                 <div class="certificates-grid">
                     <div class="certificate-card">
                         <div class="certificate-image">
-                            <img src="images/Python for Beginners_certificate.jpg" alt="Python Certificate"
+                            <img src="images/Python_for_Beginners_certificate.jpg" alt="Python Certificate"
                                 loading="lazy">
                             <div class="certificate-overlay">
                                 <a href="#" class="view-certificate"
-                                    data-image="images/Python for Beginners_certificate.jpg"
+                                    data-image="images/Python_for_Beginners_certificate.jpg"
                                     data-title="Python Programming Certificate">
                                     <i class="fas fa-expand"></i>
                                 </a>
@@ -154,7 +217,7 @@
                             <p class="certificate-date">Programming Fundamentals & Syntax</p>
                             <div class="certificate-actions">
                                 <a href="#" class="btn btn-small view-certificate-btn"
-                                    data-image="images/Python for Beginners_certificate.jpg"
+                                    data-image="images/Python_for_Beginners_certificate.jpg"
                                     data-title="Python Programming Certificate">View Certificate</a>
                             </div>
                         </div>
@@ -162,11 +225,11 @@
 
                     <div class="certificate-card">
                         <div class="certificate-image">
-                            <img src="images/Introduction to HTML_certificate.jpg" alt="HTML Certificate"
+                            <img src="images/Introduction_to_HTML_certificate.jpg" alt="HTML Certificate"
                                 loading="lazy">
                             <div class="certificate-overlay">
                                 <a href="#" class="view-certificate"
-                                    data-image="images/Introduction to HTML_certificate.jpg"
+                                    data-image="images/Introduction_to_HTML_certificate.jpg"
                                     data-title="HTML Certificate">
                                     <i class="fas fa-expand"></i>
                                 </a>
@@ -178,7 +241,7 @@
                             <p class="certificate-date">Web Development Fundamentals</p>
                             <div class="certificate-actions">
                                 <a href="#" class="btn btn-small view-certificate-btn"
-                                    data-image="images/Introduction to HTML_certificate.jpg"
+                                    data-image="images/Introduction_to_HTML_certificate.jpg"
                                     data-title="HTML Certificate">View Certificate</a>
                             </div>
                         </div>
@@ -235,16 +298,22 @@
                 <div class="footer-section">
                     <h4>Connect</h4>
                     <div class="social-links">
-                        <a href="https://www.linkedin.com/in/abdullahi-waziri-1b52142b3" aria-label="LinkedIn"><i
-                                class="fab fa-linkedin"></i></a>
-                        <a href="https://github.com/Ziriskee" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                        <a href="mailto:waziriabdullahi36@gmail.com" aria-label="Email"><i
-                                class="fas fa-envelope"></i></a>
+                        <a href="https://www.linkedin.com/in/abdullahi-waziri-1b52142b3"
+                            aria-label="View my LinkedIn profile" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://github.com/Ziriskee" aria-label="View my GitHub profile" target="_blank"
+                            rel="noopener noreferrer">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="mailto:waziriabdullahi36@gmail.com" aria-label="Send me an email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
                     </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 Abdullahi Waziri Bello. All rights reserved.</p>
+                <p>&copy; 2026 Abdullahi Waziri Bello. All rights reserved.</p>
             </div>
         </div>
     </footer>
